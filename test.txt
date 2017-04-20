@@ -1,0 +1,4 @@
+﻿<!-- dsd -->
+==ds==
+<ref name=1> {{dsd}} </ref>
+{{ t  | arg = sd }}
