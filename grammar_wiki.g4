@@ -29,7 +29,7 @@ reference
     ;
 
 reference_content
-    :   TextComment | AnyText | link | template
+    :   TextComment | AnyText | link | template | '[' AnyText ']'
     ;
 
 template
