@@ -62,12 +62,57 @@ class grammar_wikiListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by grammar_wikiParser#headings.
-    def enterHeadings(self, ctx:grammar_wikiParser.HeadingsContext):
+    # Enter a parse tree produced by grammar_wikiParser#reference.
+    def enterReference(self, ctx:grammar_wikiParser.ReferenceContext):
         pass
 
-    # Exit a parse tree produced by grammar_wikiParser#headings.
-    def exitHeadings(self, ctx:grammar_wikiParser.HeadingsContext):
+    # Exit a parse tree produced by grammar_wikiParser#reference.
+    def exitReference(self, ctx:grammar_wikiParser.ReferenceContext):
+        pass
+
+
+    # Enter a parse tree produced by grammar_wikiParser#reference_content.
+    def enterReference_content(self, ctx:grammar_wikiParser.Reference_contentContext):
+        pass
+
+    # Exit a parse tree produced by grammar_wikiParser#reference_content.
+    def exitReference_content(self, ctx:grammar_wikiParser.Reference_contentContext):
+        pass
+
+
+    # Enter a parse tree produced by grammar_wikiParser#template.
+    def enterTemplate(self, ctx:grammar_wikiParser.TemplateContext):
+        pass
+
+    # Exit a parse tree produced by grammar_wikiParser#template.
+    def exitTemplate(self, ctx:grammar_wikiParser.TemplateContext):
+        pass
+
+
+    # Enter a parse tree produced by grammar_wikiParser#template_arg.
+    def enterTemplate_arg(self, ctx:grammar_wikiParser.Template_argContext):
+        pass
+
+    # Exit a parse tree produced by grammar_wikiParser#template_arg.
+    def exitTemplate_arg(self, ctx:grammar_wikiParser.Template_argContext):
+        pass
+
+
+    # Enter a parse tree produced by grammar_wikiParser#template_arg_content.
+    def enterTemplate_arg_content(self, ctx:grammar_wikiParser.Template_arg_contentContext):
+        pass
+
+    # Exit a parse tree produced by grammar_wikiParser#template_arg_content.
+    def exitTemplate_arg_content(self, ctx:grammar_wikiParser.Template_arg_contentContext):
+        pass
+
+
+    # Enter a parse tree produced by grammar_wikiParser#heading.
+    def enterHeading(self, ctx:grammar_wikiParser.HeadingContext):
+        pass
+
+    # Exit a parse tree produced by grammar_wikiParser#heading.
+    def exitHeading(self, ctx:grammar_wikiParser.HeadingContext):
         pass
 
 
