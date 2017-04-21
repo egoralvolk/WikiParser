@@ -33,13 +33,16 @@ reference_content
     ;
 
 template
-    :   StartTemplate AnyText (OrDelimitter template_args)* EndTemplate
+    :   StartTemplate AnyText (OrDelimitter template_arg)* EndTemplate
     ;
 
-template_args
-    :   AnyText AssignementDelimitter AnyText
+template_arg
+    :   AnyText AssignementDelimitter template_arg_content?
     ;
 
+template_arg_content
+    :   (AnyText? template)* AnyText
+    ;
 
 heading
     :   heading1
