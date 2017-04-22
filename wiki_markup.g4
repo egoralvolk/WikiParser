@@ -11,7 +11,7 @@ elements_markup
     |   table
     |   url_or_email
     |   assignment
-    |   list
+    |   lists
     |   headers
     |   accentuation
     |   ignore_element
@@ -30,11 +30,14 @@ elements_markup
     |   DollarSymbol
     |   QuestionSymbol
     |   PlusSymbol
-    |   NumSymbol)+
+    |   NumSymbol
+    |   PercentSymbol
+    |   TableDelimitter
+    |   BackSlashSymbol)+
     ;
 
 tags
-    :   ref | comment | nowiki | code | syntaxhighlight | pre | other_tags
+    :   ref | comment | nowiki | code | syntaxhighlight | pre | math | tt | other_tags
     ;
 
 comment
@@ -44,7 +47,7 @@ comment
     ;
 
 text_comment
-    :   elements_markup+
+    :   elements_markup
     ;
 
 nowiki
@@ -67,14 +70,27 @@ syntaxhighlight
 
 pre
     :   LessThanSymbol 'pre' GreaterThanSymbol
-            AnyText?
+            .*?
         LessThanSymbol ForwardSlashSymbol 'pre' GreaterThanSymbol
     ;
 
+math
+    :   LessThanSymbol 'math' GreaterThanSymbol
+            .*?
+        LessThanSymbol ForwardSlashSymbol 'math' GreaterThanSymbol
+    ;
+
+tt
+    :   LessThanSymbol 'tt' GreaterThanSymbol
+            .*?
+        LessThanSymbol ForwardSlashSymbol 'tt' GreaterThanSymbol
+    ;
+
 ref
-    :   '<ref' ref_name? ForwardSlashSymbol? GreaterThanSymbol
-            (ref_content?
-        LessThanSymbol ForwardSlashSymbol 'ref' GreaterThanSymbol)?
+    :   '<ref' ref_name ForwardSlashSymbol GreaterThanSymbol
+    |   '<ref' ref_name? ForwardSlashSymbol? GreaterThanSymbol
+            ref_content?
+        LessThanSymbol ForwardSlashSymbol 'ref' GreaterThanSymbol
     ;
 
 ref_name
@@ -82,7 +98,7 @@ ref_name
     ;
 
 ref_content
-    :   elements_markup+
+    :   elements_markup
     ;
 
 other_tags
@@ -92,8 +108,9 @@ other_tags
     ;
 
 content_other_tags
-    :   AnyText | ApostropheSymbol | SemicolonSymbol | DashSymbol | HyphenSymbol
-    |  ColonSymbol | CommaSymbol | DotSymbol | link | url_or_email | ignore_element | template
+    :   AnyText | ApostropheSymbol | SemicolonSymbol | DashSymbol | HyphenSymbol | BackSlashSymbol
+    | CaretSymbol | LessThanSymbol | GreaterThanSymbol | PlusSymbol | AssignmentSymbol
+    | ColonSymbol | CommaSymbol | DotSymbol | link | url_or_email | ignore_element | template | assignment
     ;
 
 template
@@ -104,8 +121,9 @@ template
 
 template_element
     :   (AnyText | ApostropheSymbol |CommaSymbol| ColonSymbol| ForwardSlashSymbol | PlusSymbol
+        | TableDelimitter | 'ref' | SemicolonSymbol
         | HyphenSymbol | SharpSymbol | QuoteSymbol | DashSymbol | BackSlashSymbol | ExclamationMarkSymbol
-        | DotSymbol | TildeSymbol | PercentSymbol | assignment | ignore_element | tags | link)+
+        | DotSymbol | TildeSymbol | PercentSymbol| template | assignment | ignore_element | tags | link)+
     ;
 
 ignore_element
@@ -113,11 +131,12 @@ ignore_element
     ;
 
 ignore_content
-    :   elements_markup+
+    :   elements_markup
     ;
 
 table
-    :  LeftCurlyBrace (PipeSimbol | '{{!}}') .*? (PipeSimbol | '{{!}}') RightCurlyBrace
+    :  LeftCurlyBrace PipeSimbol .*? PipeSimbol RightCurlyBrace
+    |  '{{{!}}' .*? '{{!}}}'
     ;
 
 link
@@ -127,7 +146,7 @@ link
     ;
 
 link_element
-    :   elements_markup+
+    :   elements_markup
     ;
 
 url_or_email
@@ -138,10 +157,10 @@ content_url_or_email
     :   (AnyText | SharpSymbol | QuoteSymbol | ColonSymbol | DotSymbol | NumSymbol
     | ForwardSlashSymbol | '='  | PercentSymbol | ExclamationMarkSymbol  | PlusSymbol
     | AmpersandSymbol | AtEmailSymbol | QuestionSymbol | DashSymbol | SemicolonSymbol
-    | HyphenSymbol | ApostropheSymbol | CommaSymbol | accentuation | ignore_element)+
+    | HyphenSymbol | ApostropheSymbol | CommaSymbol | accentuation | ignore_element | comment)+
     ;
 
-list
+lists
     :   (list_element)+
     ;
 
@@ -169,7 +188,8 @@ list_element
                                     |   ExclamationMarkSymbol
                                     |   DollarSymbol
                                     |   QuestionSymbol
-                                    |   NumSymbol)*
+                                    |   NumSymbol
+                                    |   Digit+ ')')*
     ;
 
 assignment
@@ -195,7 +215,7 @@ structural_accentuation
     ;
 
 text_accentuation
-    :   elements_markup+
+    :   elements_markup
     ;
 
 headers
@@ -208,31 +228,31 @@ headers
     ;
 
 contend_header
-    :   elements_markup+
+    :   elements_markup
     ;
 
 header1
-    : H1 contend_header H1
+    : H1 contend_header? H1
     ;
 
 header2
-    : H2 contend_header H2
+    : H2 contend_header? H2
     ;
 
 header3
-    : H3 contend_header H3
+    : H3 contend_header? H3
     ;
 
 header4
-    : H4 contend_header H4
+    : H4 contend_header? H4
     ;
 
 header5
-    : H5 contend_header H5
+    : H5 contend_header? H5
     ;
 
 header6
-    : H6 contend_header H6
+    : H6 contend_header? H6
     ;
 
 AnyText
@@ -295,7 +315,7 @@ DollarSymbol: '$';
 
 DotSymbol: '.';
 
-ExclamationMarkSymbol: [!];
+ExclamationMarkSymbol: '!';
 
 ForwardSlashSymbol: '/';
 
@@ -336,6 +356,10 @@ StarSymbol: '*';
 TildeSymbol: '~';
 
 UnderscoreSymbol: '_';
+
+TableDelimitter
+    :   '{{!}}'
+    ;
 
 Whitespace
     :   [ \t] -> skip
