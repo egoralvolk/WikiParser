@@ -103,8 +103,8 @@ template
     ;
 
 template_element
-    :   (AnyText | ApostropheSymbol |CommaSymbol| ColonSymbol| ForwardSlashSymbol
-        | HyphenSymbol | SharpSymbol | QuoteSymbol | DashSymbol | BackSlashSymbol
+    :   (AnyText | ApostropheSymbol |CommaSymbol| ColonSymbol| ForwardSlashSymbol | PlusSymbol
+        | HyphenSymbol | SharpSymbol | QuoteSymbol | DashSymbol | BackSlashSymbol | ExclamationMarkSymbol
         | DotSymbol | TildeSymbol | PercentSymbol | assignment | ignore_element | tags | link)+
     ;
 
@@ -273,9 +273,9 @@ AcuteSymbol: '`';
 
 AmpersandSymbol: '&';
 
-ApostropheSymbol: '\'' | ['];
+ApostropheSymbol: '\'';
 
-AssignmentSymbol: [=] | '=';
+AssignmentSymbol: [=];
 
 AtEmailSymbol: '@';
 
@@ -285,17 +285,17 @@ CaretSymbol: '^';
 
 CloseParenthesisSymbol: ')';
 
-ColonSymbol: ':' | [:];
+ColonSymbol: ':';
 
 CommaSymbol: ',';
 
-DashSymbol: '—' | '–' | '—';
+DashSymbol: '—' | '–';
 
 DollarSymbol: '$';
 
 DotSymbol: '.';
 
-ExclamationMarkSymbol: '!';
+ExclamationMarkSymbol: [!];
 
 ForwardSlashSymbol: '/';
 
@@ -319,7 +319,7 @@ PipeSimbol: '|';
 
 PlusSymbol: '+';
 
-QuoteSymbol: '"' | ["];
+QuoteSymbol: '"';
 
 QuestionSymbol: '?';
 

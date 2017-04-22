@@ -1,15 +1,15 @@
 import sys
 from antlr4 import *
-from gen.grammar_wikiLexer import grammar_wikiLexer
-from gen.grammar_wikiParser import grammar_wikiParser
+from gen.wiki_markupLexer import wiki_markupLexer
+from gen.wiki_markupParser import wiki_markupParser
 
 
 def main(argv):
     input = FileStream(argv[1], encoding='utf-8')
-    lexer = grammar_wikiLexer(input)
+    lexer = wiki_markupLexer(input)
     stream = CommonTokenStream(lexer)
-    parser = grammar_wikiParser(stream)
-    tree = parser.run_program()
+    parser = wiki_markupParser(stream)
+    tree = parser.wiki_article()
     print(tree.toStringTree(ruleNames=[''], recog=parser))
 
 
