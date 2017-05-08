@@ -98,10 +98,10 @@ def serializedATN():
         buf.write("\u0081}\3\2\2\2\u0081~\3\2\2\2\u0081\177\3\2\2\2\u0081")
         buf.write("\u0080\3\2\2\2\u0082\7\3\2\2\2\u0083\u0084\7-\2\2\u0084")
         buf.write("\u0085\7\'\2\2\u0085\u0086\7*\2\2\u0086\u0088\7*\2\2\u0087")
-        buf.write("\u0089\5\n\6\2\u0088\u0087\3\2\2\2\u0088\u0089\3\2\2\2")
-        buf.write("\u0089\u008a\3\2\2\2\u008a\u008b\7*\2\2\u008b\u008c\7")
-        buf.write("*\2\2\u008c\u008d\7)\2\2\u008d\t\3\2\2\2\u008e\u008f\5")
-        buf.write("\4\3\2\u008f\13\3\2\2\2\u0090\u0091\7-\2\2\u0091\u0093")
+        buf.write("\u0089\7\20\2\2\u0088\u0087\3\2\2\2\u0088\u0089\3\2\2")
+        buf.write("\2\u0089\u008a\3\2\2\2\u008a\u008b\7*\2\2\u008b\u008c")
+        buf.write("\7*\2\2\u008c\u008d\7)\2\2\u008d\t\3\2\2\2\u008e\u008f")
+        buf.write("\5\4\3\2\u008f\13\3\2\2\2\u0090\u0091\7-\2\2\u0091\u0093")
         buf.write("\7\3\2\2\u0092\u0094\7=\2\2\u0093\u0092\3\2\2\2\u0093")
         buf.write("\u0094\3\2\2\2\u0094\u0096\3\2\2\2\u0095\u0097\7(\2\2")
         buf.write("\u0096\u0095\3\2\2\2\u0096\u0097\3\2\2\2\u0097\u0098\3")
@@ -1081,9 +1081,8 @@ class wiki_markupParser ( Parser ):
         def GreaterThanSymbol(self):
             return self.getToken(wiki_markupParser.GreaterThanSymbol, 0)
 
-        def text_comment(self):
-            return self.getTypedRuleContext(wiki_markupParser.Text_commentContext,0)
-
+        def AnyText(self):
+            return self.getToken(wiki_markupParser.AnyText, 0)
 
         def getRuleIndex(self):
             return wiki_markupParser.RULE_comment
@@ -1109,6 +1108,7 @@ class wiki_markupParser ( Parser ):
 
         localctx = wiki_markupParser.CommentContext(self, self._ctx, self.state)
         self.enterRule(localctx, 6, self.RULE_comment)
+        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 129
@@ -1121,10 +1121,10 @@ class wiki_markupParser ( Parser ):
             self.match(wiki_markupParser.HyphenSymbol)
             self.state = 134
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,4,self._ctx)
-            if la_ == 1:
+            _la = self._input.LA(1)
+            if _la==wiki_markupParser.AnyText:
                 self.state = 133
-                self.text_comment()
+                self.match(wiki_markupParser.AnyText)
 
 
             self.state = 136

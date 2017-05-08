@@ -42,7 +42,7 @@ tags
 
 comment
     :   LessThanSymbol ExclamationMarkSymbol HyphenSymbol HyphenSymbol
-            text_comment?
+            AnyText?
         HyphenSymbol HyphenSymbol GreaterThanSymbol
     ;
 
@@ -254,6 +254,7 @@ header5
 header6
     : H6 contend_header? H6
     ;
+
 
 AnyText
     :   AnySymbol
